@@ -7,7 +7,7 @@
     "description": "This is a template heropack. Whether you're a pro developer or a complete beginner, we encourage you to create your own heropack for Meta Core! Use the Dev Generators to speed up making your files (suit attachables, injection items, ability selection scripts, and way more), follow the step-by-step Guide to get started, explore the interactive Space System preview, and join the Discord to share your work and get help.",
     "thumbnail": "assets/images/example.svg",
     "images": ["assets/images/example.svg"],
-    "videos": [],
+    "videos": ["https://youtu.be/eH4QsBZhuBU"],
     "links": [
       { "label": "Dev Generators", "url": "https://meta-core-dev-generators.lovable.app/" },
       { "label": "Creation Guide", "url": "https://meta-core-guide.lovable.app/" },
