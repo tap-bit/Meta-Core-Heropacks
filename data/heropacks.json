@@ -1,0 +1,17 @@
+[
+  {
+    "id": "example-heropack",
+    "title": "Example Heropack",
+    "creator": "Example Creator",
+    "featured": true,
+    "description": "Replace this with your heropack description. Edit data/heropacks.json to add, change or remove posts.",
+    "thumbnail": "assets/images/example.svg",
+    "images": ["assets/images/example.svg"],
+    "videos": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "links": [
+      { "label": "Discord", "url": "https://discord.com" },
+      { "label": "CurseForge", "url": "https://www.curseforge.com" },
+      { "label": "MCPEDL", "url": "https://mcpedl.com" }
+    ]
+  }
+]

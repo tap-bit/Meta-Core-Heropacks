@@ -1,31 +1,32 @@
 # Meta Core Heropacks
 
-Website for Meta Core – a Minecraft Bedrock superhero addon. Trusted heropack creators log in (top right) with a private code, then create or edit **one** heropack post (images, videos, GIFs, Discord/social/CurseForge/MCPEDL links). All posts are randomly featured in an auto-scrolling, infinitely looping carousel on the home page.
+Static website for **Meta Core**, a Minecraft Bedrock superhero addon. No login, no backend, no build step: it is plain HTML/CSS/JS hosted on GitHub Pages.
 
-## Setup
+## Features
+- Auto-scrolling, infinitely looping **Featured Heropacks** carousel in random order (pauses on hover; click a card for details)
+- Browse/search all heropacks, with a detail popup for each
+- Images, GIFs (stored in the repo), YouTube videos, and external links (Discord, social, CurseForge, MCPEDL)
+
+## Managing posts
+All posts live in `data/heropacks.json`. Edit it on GitHub, commit, and the site redeploys automatically. Add **one entry per heropack/creator**; a heropack does not need multiple posts since every heropack is featured randomly in the carousel.
+
+```json
+{
+  "id": "unique-id",
+  "title": "Heropack name",
+  "creator": "Creator name",
+  "featured": true,
+  "description": "About this heropack.",
+  "thumbnail": "assets/images/my-pack.png",
+  "images": ["assets/images/my-pack.png", "assets/images/demo.gif"],
+  "videos": ["https://www.youtube.com/watch?v=VIDEO_ID"],
+  "links": [{ "label": "Discord", "url": "https://discord.gg/..." }]
+}
 ```
-npm run install:all
-npm run build        # builds the React client into client/dist
-npm start            # serves API + site on http://localhost:3001
-```
-Development: `npm run dev:server` and `npm run dev:client` (Vite proxies `/api` and `/uploads`).
+Upload images/GIFs to `assets/images/` and reference them by path. Set `"featured": false` to leave a post out of the carousel.
 
-## Managing creators and login codes
-Creators are listed in `server/data/creators.json` (`id`, `name`). Generate (or set) a login code, then DM it to the creator:
-```
-npm run set-code -- <creator-id> [code]
-```
-Only a salted scrypt hash is stored. Logins are rate-limited (5 failures → 10 minute lockout) and sessions expire after 8 hours.
+## Hosting
+In the repo go to **Settings > Pages** and set **Source** to **GitHub Actions** (the included workflow deploys on every push to `main`).
 
-## Data
-Posts are stored in `server/data/posts.json` (JSON, one post per creator) and uploads in `server/uploads/` (PNG/JPG/WEBP/GIF/MP4/WEBM, 25MB max). Both are git-ignored.
-
-## Tests
-`npm test`
-
-## Deploy without running npm (Render)
-1. Create a Render account and choose **New > Blueprint**, selecting this repo (it reads `render.yaml`).
-2. In the service's **Environment** settings, set `CREATOR_CODES` to JSON mapping creator ids to their login codes, e.g. `{"example-creator-1":"abc123"}`. DM each code to the creator.
-3. Add/rename creators in `server/data/creators.json` on GitHub; Render redeploys automatically.
-
-Posts and uploads are stored on a persistent disk (`DATA_DIR=/var/data`). Render persistent disks need a paid instance; on the free tier data is wiped on each redeploy.
+## Local preview
+`python3 -m http.server` then open http://localhost:8000
