@@ -1,0 +1,50 @@
+:root { --bg: #0b0d14; --panel: #161a26; --border: #2a3042; --text: #e8ecf5; --muted: #8d96b0; --accent: #39e07a; --accent2: #ff3d71; }
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(circle at top, #1a1f33, var(--bg) 60%); color: var(--text); font-family: system-ui, sans-serif; min-height: 100vh; }
+a { color: var(--accent); }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #0008; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px); }
+.brand { font-weight: 900; font-size: 1.5rem; letter-spacing: 3px; color: var(--text); text-decoration: none; }
+.brand span, .hero h1 span { color: var(--accent); }
+.login-area { position: relative; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.who { color: var(--muted); }
+.login-pop { position: absolute; right: 0; top: 110%; width: min(300px, 90vw); background: var(--panel); border: 1px solid var(--border); padding: 16px; border-radius: 8px; display: flex; flex-direction: column; gap: 12px; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: .9rem; color: var(--muted); }
+input, select, textarea { background: #0d101a; color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 10px; font: inherit; width: 100%; }
+.btn { background: var(--accent); color: #04120a; border: 2px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; font-size: .9rem; }
+.btn.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+.btn.danger { background: transparent; color: var(--accent2); border-color: var(--accent2); }
+.btn:disabled { opacity: .5; cursor: wait; }
+.hero { text-align: center; padding: 60px 20px 30px; }
+.hero h1 { font-size: clamp(2.5rem, 10vw, 5rem); margin: 0; letter-spacing: 6px; }
+.hero p { max-width: 640px; margin: 12px auto; color: var(--muted); }
+.section { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.section h2 { border-left: 4px solid var(--accent); padding-left: 10px; }
+.muted { color: var(--muted); }
+.error { color: var(--accent2); }
+.ok { color: var(--accent); }
+.notice { background: #ff3d7122; border: 1px solid var(--accent2); padding: 12px; border-radius: 8px; }
+.carousel { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.track { display: flex; gap: 16px; width: max-content; animation: scroll linear infinite; }
+.carousel:hover .track { animation-play-state: paused; }
+@keyframes scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } .carousel { overflow-x: auto; } }
+.card { width: 220px; flex: none; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px; color: var(--text); text-decoration: none; transition: transform .2s, border-color .2s; }
+.card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.card h3 { margin: 8px 0 2px; font-size: 1rem; }
+.card p { margin: 0; font-size: .85rem; }
+.thumb { aspect-ratio: 16/10; background: #0d101a; border-radius: 6px; overflow: hidden; display: grid; place-items: center; font-size: 2.5rem; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.about p { color: var(--muted); line-height: 1.6; }
+.post h1 { margin-bottom: 0; }
+.desc { white-space: pre-wrap; line-height: 1.6; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 12px 0; }
+.gallery img, .gallery video { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+.media-item { display: flex; flex-direction: column; gap: 6px; }
+.editor { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.row input { flex: 1 1 160px; width: auto; }
+.list { list-style: none; padding: 0; margin: 0; }
+.list li { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; gap: 8px; }
+.footer { text-align: center; color: var(--muted); padding: 30px; font-size: .85rem; }
+@media (max-width: 520px) { .topbar { padding: 10px; } .brand { font-size: 1.1rem; } }
