@@ -28,11 +28,24 @@ const MIME = {
 };
 
 function createApp(opts = {}) {
-  const dataDir = opts.dataDir || path.join(__dirname, 'data');
-  const uploadDir = opts.uploadDir || path.join(__dirname, 'uploads');
-  const creatorsFile = opts.creatorsFile || path.join(dataDir, 'creators.json');
+  const dataDir = opts.dataDir || process.env.DATA_DIR || path.join(__dirname, 'data');
+  const uploadDir = opts.uploadDir || (process.env.DATA_DIR && path.join(process.env.DATA_DIR, 'uploads')) || path.join(__dirname, 'uploads');
+  const creatorsFile = opts.creatorsFile || path.join(__dirname, 'data', 'creators.json');
   const postsFile = opts.postsFile || path.join(dataDir, 'posts.json');
   fs.mkdirSync(uploadDir, { recursive: true });
+  fs.mkdirSync(dataDir, { recursive: true });
+  // Optional: CREATOR_CODES='{"creator-id":"code"}' lets codes be set as host secrets (no CLI needed).
+  let envCodes = {};
+  try { envCodes = JSON.parse(process.env.CREATOR_CODES || '{}'); } catch { console.error('CREATOR_CODES is not valid JSON'); }
+  const checkCode = (creator, code) => {
+    const envCode = envCodes[creator.id];
+    if (typeof envCode === 'string' && envCode && typeof code === 'string') {
+      const a = crypto.createHash('sha256').update(envCode).digest();
+      const b = crypto.createHash('sha256').update(code).digest();
+      if (crypto.timingSafeEqual(a, b)) return true;
+    }
+    return verifyCode(code, creator.codeHash);
+  };
 
   const readJson = (file, fallback) => {
     try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
@@ -82,7 +95,7 @@ function createApp(opts = {}) {
     if (rec.until > Date.now()) {
       return res.status(429).json({ error: 'Too many attempts. Try again later.' });
     }
-    if (!creator || !verifyCode(code, creator.codeHash)) {
+    if (!creator || !checkCode(creator, code)) {
       rec.count += 1;
       if (rec.count >= MAX_ATTEMPTS) { rec.count = 0; rec.until = Date.now() + LOCKOUT_MS; }
       attempts.set(key, rec);

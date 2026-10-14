@@ -22,3 +22,10 @@ Posts are stored in `server/data/posts.json` (JSON, one post per creator) and up
 
 ## Tests
 `npm test`
+
+## Deploy without running npm (Render)
+1. Create a Render account and choose **New > Blueprint**, selecting this repo (it reads `render.yaml`).
+2. In the service's **Environment** settings, set `CREATOR_CODES` to JSON mapping creator ids to their login codes, e.g. `{"example-creator-1":"abc123"}`. DM each code to the creator.
+3. Add/rename creators in `server/data/creators.json` on GitHub; Render redeploys automatically.
+
+Posts and uploads are stored on a persistent disk (`DATA_DIR=/var/data`). Render persistent disks need a paid instance; on the free tier data is wiped on each redeploy.
