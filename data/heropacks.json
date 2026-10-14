@@ -1,17 +1,18 @@
 [
   {
-    "id": "example-heropack",
-    "title": "Example Heropack",
-    "creator": "Example Creator",
+    "id": "template-heropack",
+    "title": "Template Heropack",
+    "creator": "Meta Core Team",
     "featured": true,
-    "description": "Replace this with your heropack description. Edit data/heropacks.json to add, change or remove posts.",
+    "description": "This is a template heropack. Whether you're a pro developer or a complete beginner, we encourage you to create your own heropack for Meta Core! Use the Dev Generators to speed up making your files (suit attachables, injection items, ability selection scripts, and way more), follow the step-by-step Guide to get started, explore the interactive Space System preview, and join the Discord to share your work and get help.",
     "thumbnail": "assets/images/example.svg",
     "images": ["assets/images/example.svg"],
-    "videos": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "videos": [],
     "links": [
-      { "label": "Discord", "url": "https://discord.com" },
-      { "label": "CurseForge", "url": "https://www.curseforge.com" },
-      { "label": "MCPEDL", "url": "https://mcpedl.com" }
+      { "label": "Dev Generators", "url": "https://meta-core-dev-generators.lovable.app/" },
+      { "label": "Creation Guide", "url": "https://meta-core-guide.lovable.app/" },
+      { "label": "Space System Preview", "url": "https://meta-core-space-map.lovable.app/?v=2" },
+      { "label": "Discord", "url": "https://discord.gg/Yr7Dbwc5f5" }
     ]
   }
 ]
